@@ -6,13 +6,15 @@
       name: "Hagen-Boele",
       address: "Denkmalstr. 3, 58099 Hagen",
       phone: "02331 632463",
-      phoneHref: "tel:+492331632463"
+      phoneHref: "tel:+492331632463",
+      email: "hagen@orthotraum-hakimi.de"
     },
     ennepetal: {
       name: "Ennepetal",
       address: "Königsberger Str. 66, 58256 Ennepetal",
       phone: "02333 75856",
-      phoneHref: "tel:+49233375856"
+      phoneHref: "tel:+49233375856",
+      email: "ennepetal@orthotraum-hakimi.de"
     }
   };
 
@@ -48,6 +50,17 @@
       topbarPhone.textContent = "📞 " + loc.phone;
     }
 
+    // Update topbar quick-email link
+    var topbarEmail = document.getElementById("topbar-email");
+    if (topbarEmail) {
+      topbarEmail.setAttribute("href", "mailto:" + loc.email);
+      topbarEmail.textContent = "✉ " + loc.email;
+    }
+
+    // Update contact form target
+    var form = document.getElementById("contactForm");
+    if (form) form.setAttribute("action", "mailto:" + loc.email);
+
     // Update the location panels under #standorte
     document.querySelectorAll(".loc-panel").forEach(function (panel) {
       panel.classList.toggle("active", panel.id === "panel-" + key);
@@ -68,6 +81,16 @@
     if (!btn) return;
     setActiveLocation(btn.getAttribute("data-loc"));
   });
+
+  // Keep the mailto target in sync if the visitor changes the dropdown directly
+  var locationSelect = document.getElementById("location");
+  if (locationSelect) {
+    locationSelect.addEventListener("change", function () {
+      var key = locationSelect.value === "Ennepetal" ? "ennepetal" : "hagen";
+      var form = document.getElementById("contactForm");
+      if (form) form.setAttribute("action", "mailto:" + LOCATIONS[key].email);
+    });
+  }
 
   // Mobile nav toggle
   var navToggle = document.getElementById("navToggle");
