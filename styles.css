@@ -173,7 +173,7 @@ button{ font-family:inherit; cursor:pointer; }
   border:1px solid var(--line); padding:34px; position:relative;
 }
 .about-photo{
-  width:100%; aspect-ratio:4/5; border-radius:18px; object-fit:cover; display:block;
+  width:100%; aspect-ratio:16/9; border-radius:18px; object-fit:cover; object-position:center 30%; display:block;
 }
 .about-badge{
   position:absolute; bottom:-18px; right:-18px; background:var(--accent); color:var(--ink);
@@ -195,7 +195,7 @@ button{ font-family:inherit; cursor:pointer; }
 /* ---------- Doctors ---------- */
 .doctor-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
 .doctor-card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); }
-.doctor-card img{ width:100%; aspect-ratio:16/10; object-fit:cover; object-position:top; display:block; }
+.doctor-card img{ width:100%; aspect-ratio:4/5; object-fit:cover; object-position:top; display:block; }
 .doctor-card-body{ padding:26px 28px 30px; }
 .doctor-card-body strong{ display:block; font-family:"Fraunces",serif; font-size:1.2rem; font-weight:600; }
 .doctor-role{ display:block; font-size:.85rem; color:var(--brand); font-weight:700; margin-top:4px; }
