@@ -66,6 +66,11 @@
       panel.classList.toggle("active", panel.id === "panel-" + key);
     });
 
+    // Update the team panels under #team
+    document.querySelectorAll("[data-team-panel]").forEach(function (panel) {
+      panel.classList.toggle("active", panel.getAttribute("data-team-panel") === key);
+    });
+
     // Preselect matching option in the contact form
     var select = document.getElementById("location");
     if (select) {
