@@ -79,8 +79,8 @@
       <div class="hero-card">
         <h3>Warum Patient:innen uns vertrauen</h3>
         <div class="hero-stat-grid">
-          <div class="hero-stat"><b>2×</b><span>Standorte in der Region</span></div>
-          <div class="hero-stat"><b>5</b><span>Sprachen im Praxisteam</span></div>
+          <div class="hero-stat"><b data-count="2" data-suffix="×">0</b><span>Standorte in der Region</span></div>
+          <div class="hero-stat"><b data-count="5">0</b><span>Sprachen im Praxisteam</span></div>
           <div class="hero-stat"><b>D.A.F.</b><span>Anerkannter Fußchirurg</span></div>
           <div class="hero-stat"><b>Kasse &amp; Privat</b><span>Alle Kostenträger</span></div>
         </div>
@@ -293,32 +293,45 @@
     </div>
 
     <h3 class="leistungen-sub-title">Weitere Leistungen im Überblick</h3>
-    <div class="chip-list">
-      <span>Skelettalterbestimmung</span>
-      <span>Labor-Untersuchungen</span>
-      <span>Knochendichtemessung (ODM)</span>
-      <span>Videosprechstunde</span>
-      <span>Digitale Fußdruckmessung</span>
-      <span>Sportlerberatung</span>
-      <span>Ultraschalluntersuchungen</span>
-      <span>Digitales Röntgen</span>
-      <span>Chirotherapie</span>
-      <span>Akupunktur</span>
-      <span>Magnetfeldtherapie</span>
-      <span>Kinesio-Taping</span>
-      <span>Hyaluron-Injektionen</span>
-      <span>Stoßwellentherapie</span>
-      <span>Neuraltherapie</span>
-      <span>Eigenblutbehandlung (ACP, PRP)</span>
-      <span>Ultraschallgesteuerte Injektion, Wirbelsäule &amp; Extremitäten</span>
-      <span>Facettenthermodenervation</span>
-      <span>TENS</span>
-      <span>Infiltrationstherapie</span>
-      <span>Elektrotherapie</span>
-      <span>Ultraschallbehandlung</span>
-      <span>Botox-Spritzentherapie</span>
-      <span>Stammzellentherapie bei Arthrose</span>
+    <p class="leistungen-sub-lead">Nach Behandlungsart filtern — genau wie in unserer Praxis der Ablauf von Diagnostik bis Therapie aufgebaut ist.</p>
+
+    <div class="leistungen-filter" role="tablist" aria-label="Leistungen filtern">
+      <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">Alle <span class="filter-count">24</span></button>
+      <button type="button" class="filter-btn" data-filter="diagnostik" role="tab" aria-selected="false">Diagnostische Verfahren <span class="filter-count">8</span></button>
+      <button type="button" class="filter-btn" data-filter="nichtinvasiv" role="tab" aria-selected="false">Nicht-invasive Behandlung <span class="filter-count">8</span></button>
+      <button type="button" class="filter-btn" data-filter="minimalinvasiv" role="tab" aria-selected="false">Minimalinvasive Behandlung <span class="filter-count">8</span></button>
     </div>
+
+    <div class="leistungen-grid" id="leistungenGrid">
+      <div class="leistung-item" data-category="diagnostik"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Skelettalterbestimmung</span></div>
+      <div class="leistung-item" data-category="diagnostik"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Labor-Untersuchungen</span></div>
+      <div class="leistung-item" data-category="diagnostik"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Knochendichtemessung (ODM)</span></div>
+      <div class="leistung-item" data-category="diagnostik"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Videosprechstunde</span></div>
+      <div class="leistung-item" data-category="diagnostik"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Digitale Fußdruckmessung</span></div>
+      <div class="leistung-item" data-category="diagnostik"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Sportlerberatung</span></div>
+      <div class="leistung-item" data-category="diagnostik"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Ultraschalluntersuchungen</span></div>
+      <div class="leistung-item" data-category="diagnostik"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Digitales Röntgen</span></div>
+
+      <div class="leistung-item" data-category="nichtinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 12h3l2-6 4 12 3-9 2 3h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Chirotherapie</span></div>
+      <div class="leistung-item" data-category="nichtinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 12h3l2-6 4 12 3-9 2 3h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Akupunktur</span></div>
+      <div class="leistung-item" data-category="nichtinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 12h3l2-6 4 12 3-9 2 3h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Magnetfeldtherapie</span></div>
+      <div class="leistung-item" data-category="nichtinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 12h3l2-6 4 12 3-9 2 3h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Kinesio-Taping</span></div>
+      <div class="leistung-item" data-category="nichtinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 12h3l2-6 4 12 3-9 2 3h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>TENS</span></div>
+      <div class="leistung-item" data-category="nichtinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 12h3l2-6 4 12 3-9 2 3h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Elektrotherapie</span></div>
+      <div class="leistung-item" data-category="nichtinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 12h3l2-6 4 12 3-9 2 3h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Ultraschallbehandlung</span></div>
+      <div class="leistung-item" data-category="nichtinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 12h3l2-6 4 12 3-9 2 3h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Neuraltherapie</span></div>
+
+      <div class="leistung-item" data-category="minimalinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 4l2 2-2 2M14 6l4 4-8.5 8.5-4.5 1 1-4.5L14.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 9l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Hyaluron-Injektionen</span></div>
+      <div class="leistung-item" data-category="minimalinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 4l2 2-2 2M14 6l4 4-8.5 8.5-4.5 1 1-4.5L14.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 9l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Stoßwellentherapie</span></div>
+      <div class="leistung-item" data-category="minimalinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 4l2 2-2 2M14 6l4 4-8.5 8.5-4.5 1 1-4.5L14.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 9l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Eigenblutbehandlung (ACP, PRP)</span></div>
+      <div class="leistung-item" data-category="minimalinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 4l2 2-2 2M14 6l4 4-8.5 8.5-4.5 1 1-4.5L14.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 9l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Ultraschallgesteuerte Injektion, Wirbelsäule &amp; Extremitäten</span></div>
+      <div class="leistung-item" data-category="minimalinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 4l2 2-2 2M14 6l4 4-8.5 8.5-4.5 1 1-4.5L14.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 9l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Facettenthermodenervation</span></div>
+      <div class="leistung-item" data-category="minimalinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 4l2 2-2 2M14 6l4 4-8.5 8.5-4.5 1 1-4.5L14.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 9l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Infiltrationstherapie</span></div>
+      <div class="leistung-item" data-category="minimalinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 4l2 2-2 2M14 6l4 4-8.5 8.5-4.5 1 1-4.5L14.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 9l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Botox-Spritzentherapie</span></div>
+      <div class="leistung-item" data-category="minimalinvasiv"><div class="leistung-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 4l2 2-2 2M14 6l4 4-8.5 8.5-4.5 1 1-4.5L14.5 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 9l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><span>Stammzellentherapie bei Arthrose</span></div>
+    </div>
+    <p class="leistungen-empty" id="leistungenEmpty" hidden>Für diese Kategorie sind aktuell keine Leistungen hinterlegt.</p>
+
     <p class="notice">Notfallsprechstunde täglich — Ennepetal 07:45 Uhr, Hagen-Boele 08:00 Uhr. Online-Termine buchen Sie bequem über unsere Startseite.</p>
   </div>
 </section>

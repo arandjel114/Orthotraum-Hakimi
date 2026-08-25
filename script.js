@@ -117,4 +117,104 @@
 
   // Init default location
   setActiveLocation("hagen");
+
+  var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---------- Leistungen filter ----------
+  var leistungenGrid = document.getElementById("leistungenGrid");
+  var leistungenEmpty = document.getElementById("leistungenEmpty");
+  if (leistungenGrid) {
+    var filterBtns = document.querySelectorAll(".filter-btn");
+    var applyFilter = function (filter) {
+      var items = leistungenGrid.querySelectorAll(".leistung-item");
+      var visibleCount = 0;
+      var i = 0;
+      items.forEach(function (item) {
+        var match = filter === "all" || item.getAttribute("data-category") === filter;
+        if (match) {
+          item.style.display = "";
+          visibleCount++;
+          if (!prefersReducedMotion) {
+            item.style.animationDelay = i * 30 + "ms";
+            item.classList.remove("leistung-anim");
+            void item.offsetWidth; // restart animation
+            item.classList.add("leistung-anim");
+          }
+          i++;
+        } else {
+          item.style.display = "none";
+        }
+      });
+      if (leistungenEmpty) leistungenEmpty.hidden = visibleCount > 0;
+    };
+
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        filterBtns.forEach(function (b) {
+          b.classList.toggle("active", b === btn);
+          b.setAttribute("aria-selected", b === btn ? "true" : "false");
+        });
+        applyFilter(btn.getAttribute("data-filter"));
+      });
+    });
+  }
+
+  // ---------- Scroll reveal ----------
+  var revealTargets = document.querySelectorAll(
+    ".section-head, .service-card, .doctor-card, .team-card, .quote-card, " +
+    ".process-card, .contact-card, .loc-tab, .cta-band, .hero-loc"
+  );
+
+  if (prefersReducedMotion || typeof IntersectionObserver === "undefined") {
+    revealTargets.forEach(function (el) { el.classList.add("reveal", "in-view"); });
+  } else {
+    // Stagger siblings within the same parent so grids animate in sequence
+    var delayCounters = new Map();
+    revealTargets.forEach(function (el) {
+      el.classList.add("reveal");
+      var parent = el.parentElement;
+      var n = (delayCounters.get(parent) || 0);
+      delayCounters.set(parent, n + 1);
+      el.style.transitionDelay = Math.min(n * 70, 420) + "ms";
+    });
+
+    var revealObserver = new IntersectionObserver(
+      function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+    revealTargets.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  // ---------- Hero stat count-up ----------
+  var countEls = document.querySelectorAll(".hero-stat b[data-count]");
+  if (countEls.length) {
+    var runCount = function (el) {
+      var target = parseInt(el.getAttribute("data-count"), 10) || 0;
+      var suffix = el.getAttribute("data-suffix") || "";
+      if (prefersReducedMotion) {
+        el.textContent = target + suffix;
+        return;
+      }
+      var start = null;
+      var duration = 900;
+      var step = function (ts) {
+        if (start === null) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    setTimeout(function () {
+      countEls.forEach(runCount);
+    }, 500);
+  }
 })();
