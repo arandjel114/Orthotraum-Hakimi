@@ -199,9 +199,22 @@
     });
   }
 
-  // ---------- Scroll reveal ----------
+  // ---------- Flip cards: tap-to-flip on touch devices, keyboard support ----------
+  document.querySelectorAll(".flip-card").forEach(function (card) {
+    card.addEventListener("click", function () {
+      card.classList.toggle("flipped");
+    });
+    card.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        card.classList.toggle("flipped");
+      }
+    });
+  });
+
+  // ---------- Scroll reveal (re-animates both scrolling down AND back up) ----------
   var revealTargets = document.querySelectorAll(
-    ".section-head, .service-card, .doctor-card, .team-card, " +
+    ".section-head, .flip-card, .doctor-card, .team-card, " +
     ".process-card, .contact-card, .loc-tab, .cta-band, .hero-loc, " +
     ".leistungen-stat, .gallery-item, .digital-card, .qr-card"
   );
@@ -219,18 +232,67 @@
       el.style.transitionDelay = Math.min(n * 70, 420) + "ms";
     });
 
+    // Toggling both ways (not unobserving) means elements animate back out when
+    // scrolled past going up, then back in again — motion in both directions.
     var revealObserver = new IntersectionObserver(
-      function (entries, observer) {
+      function (entries) {
         entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            observer.unobserve(entry.target);
-          }
+          entry.target.classList.toggle("in-view", entry.isIntersecting);
         });
       },
       { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
     );
     revealTargets.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  // ---------- Navbar: hide on scroll down, show on scroll up ----------
+  var navbarEl = document.querySelector(".navbar");
+  if (navbarEl) {
+    var lastScrollY = window.scrollY;
+    var navTicking = false;
+    var handleNavScroll = function () {
+      var currentY = window.scrollY;
+      if (currentY > lastScrollY && currentY > navbarEl.offsetHeight * 1.5) {
+        navbarEl.classList.add("nav-hidden");
+      } else {
+        navbarEl.classList.remove("nav-hidden");
+      }
+      lastScrollY = currentY;
+      navTicking = false;
+    };
+    document.addEventListener(
+      "scroll",
+      function () {
+        if (!navTicking) {
+          requestAnimationFrame(handleNavScroll);
+          navTicking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  // ---------- Hero parallax: layers drift with the cursor for a 3D depth feel ----------
+  var heroEl = document.querySelector(".hero");
+  if (heroEl && !prefersReducedMotion && window.matchMedia("(hover: hover)").matches) {
+    var heroArt = heroEl.querySelector(".hero-art");
+    var heroCopy = heroEl.querySelector(".hero-copy");
+    heroEl.addEventListener("mousemove", function (e) {
+      var rect = heroEl.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width - 0.5;
+      var y = (e.clientY - rect.top) / rect.height - 0.5;
+      if (heroArt) {
+        heroArt.style.transform =
+          "perspective(1200px) rotateY(" + (x * 8) + "deg) rotateX(" + (y * -8) + "deg) translateZ(10px)";
+      }
+      if (heroCopy) {
+        heroCopy.style.transform = "translate(" + (x * -10) + "px, " + (y * -6) + "px)";
+      }
+    });
+    heroEl.addEventListener("mouseleave", function () {
+      if (heroArt) heroArt.style.transform = "";
+      if (heroCopy) heroCopy.style.transform = "";
+    });
   }
 
   // ---------- Count-up numbers (hero stats + leistungen stats) ----------
@@ -322,18 +384,29 @@
     sectionMap.forEach(function (item) { spyObserver.observe(item.section); });
   }
 
-  // ---------- Doctor card 3D tilt-on-hover ----------
+  // ---------- 3D tilt-on-hover for cards (skipped on touch/no-hover devices) ----------
   if (!prefersReducedMotion && window.matchMedia("(hover: hover)").matches) {
-    document.querySelectorAll(".doctor-card").forEach(function (card) {
-      card.addEventListener("mousemove", function (e) {
-        var rect = card.getBoundingClientRect();
-        var x = (e.clientX - rect.left) / rect.width - 0.5;
-        var y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform =
-          "perspective(900px) rotateY(" + (x * 6) + "deg) rotateX(" + (y * -6) + "deg) translateY(-4px)";
-      });
-      card.addEventListener("mouseleave", function () {
-        card.style.transform = "";
+    var tiltConfigs = [
+      { selector: ".doctor-card", strength: 6, lift: -4, perspective: 900 },
+      { selector: ".team-card", strength: 8, lift: -3, perspective: 800 },
+      { selector: ".digital-card", strength: 7, lift: -3, perspective: 800 },
+      { selector: ".leistungen-stat", strength: 8, lift: -3, perspective: 700 },
+      { selector: ".contact-card", strength: 5, lift: -2, perspective: 900 },
+      { selector: ".gallery-item", strength: 4, lift: 0, perspective: 1200 }
+    ];
+    tiltConfigs.forEach(function (cfg) {
+      document.querySelectorAll(cfg.selector).forEach(function (card) {
+        card.addEventListener("mousemove", function (e) {
+          var rect = card.getBoundingClientRect();
+          var x = (e.clientX - rect.left) / rect.width - 0.5;
+          var y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform =
+            "perspective(" + cfg.perspective + "px) rotateY(" + (x * cfg.strength) + "deg) " +
+            "rotateX(" + (y * -cfg.strength) + "deg) translateY(" + cfg.lift + "px)";
+        });
+        card.addEventListener("mouseleave", function () {
+          card.style.transform = "";
+        });
       });
     });
   }
