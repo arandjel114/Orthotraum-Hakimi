@@ -71,6 +71,11 @@
       panel.classList.toggle("active", panel.getAttribute("data-team-panel") === key);
     });
 
+    // Highlight the doctor who practices at the selected location
+    document.querySelectorAll(".doctor-card[data-loc]").forEach(function (card) {
+      card.classList.toggle("loc-active", card.getAttribute("data-loc") === key);
+    });
+
     // Preselect matching option in the contact form
     var select = document.getElementById("location");
     if (select) {
@@ -124,7 +129,17 @@
   var leistungenGrid = document.getElementById("leistungenGrid");
   var leistungenEmpty = document.getElementById("leistungenEmpty");
   if (leistungenGrid) {
-    var filterBtns = document.querySelectorAll(".filter-btn");
+    var filterBtns = Array.prototype.slice.call(document.querySelectorAll(".filter-btn"));
+    var filterPill = document.getElementById("filterPill");
+
+    var movePill = function (btn) {
+      if (!filterPill || !btn) return;
+      filterPill.style.left = btn.offsetLeft + "px";
+      filterPill.style.top = btn.offsetTop + "px";
+      filterPill.style.width = btn.offsetWidth + "px";
+      filterPill.style.height = btn.offsetHeight + "px";
+    };
+
     var applyFilter = function (filter) {
       var items = leistungenGrid.querySelectorAll(".leistung-item");
       var visibleCount = 0;
@@ -143,6 +158,8 @@
           i++;
         } else {
           item.style.display = "none";
+          item.classList.remove("open");
+          item.setAttribute("aria-expanded", "false");
         }
       });
       if (leistungenEmpty) leistungenEmpty.hidden = visibleCount > 0;
@@ -154,15 +171,39 @@
           b.classList.toggle("active", b === btn);
           b.setAttribute("aria-selected", b === btn ? "true" : "false");
         });
+        movePill(btn);
         applyFilter(btn.getAttribute("data-filter"));
+      });
+    });
+
+    var activeFilterBtn = filterBtns.filter(function (b) { return b.classList.contains("active"); })[0];
+    movePill(activeFilterBtn);
+    window.addEventListener("resize", function () {
+      var current = filterBtns.filter(function (b) { return b.classList.contains("active"); })[0];
+      movePill(current);
+    });
+
+    // Accordion: click a Leistung to reveal its short description
+    leistungenGrid.querySelectorAll(".leistung-item").forEach(function (item) {
+      item.addEventListener("click", function () {
+        var isOpen = item.classList.contains("open");
+        leistungenGrid.querySelectorAll(".leistung-item.open").forEach(function (openItem) {
+          if (openItem !== item) {
+            openItem.classList.remove("open");
+            openItem.setAttribute("aria-expanded", "false");
+          }
+        });
+        item.classList.toggle("open", !isOpen);
+        item.setAttribute("aria-expanded", String(!isOpen));
       });
     });
   }
 
   // ---------- Scroll reveal ----------
   var revealTargets = document.querySelectorAll(
-    ".section-head, .service-card, .doctor-card, .team-card, .quote-card, " +
-    ".process-card, .contact-card, .loc-tab, .cta-band, .hero-loc"
+    ".section-head, .service-card, .doctor-card, .team-card, " +
+    ".process-card, .contact-card, .loc-tab, .cta-band, .hero-loc, " +
+    ".leistungen-stat, .gallery-item, .digital-card, .qr-card"
   );
 
   if (prefersReducedMotion || typeof IntersectionObserver === "undefined") {
@@ -192,30 +233,51 @@
     revealTargets.forEach(function (el) { revealObserver.observe(el); });
   }
 
-  // ---------- Hero stat count-up ----------
-  var countEls = document.querySelectorAll(".hero-stat b[data-count]");
-  if (countEls.length) {
-    var runCount = function (el) {
-      var target = parseInt(el.getAttribute("data-count"), 10) || 0;
-      var suffix = el.getAttribute("data-suffix") || "";
-      if (prefersReducedMotion) {
-        el.textContent = target + suffix;
-        return;
-      }
-      var start = null;
-      var duration = 900;
-      var step = function (ts) {
-        if (start === null) start = ts;
-        var progress = Math.min((ts - start) / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.round(eased * target) + suffix;
-        if (progress < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
+  // ---------- Count-up numbers (hero stats + leistungen stats) ----------
+  var runCount = function (el) {
+    var target = parseInt(el.getAttribute("data-count"), 10) || 0;
+    var suffix = el.getAttribute("data-suffix") || "";
+    if (prefersReducedMotion) {
+      el.textContent = target + suffix;
+      return;
+    }
+    var start = null;
+    var duration = 900;
+    var step = function (ts) {
+      if (start === null) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
     };
-    setTimeout(function () {
-      countEls.forEach(runCount);
-    }, 500);
+    requestAnimationFrame(step);
+  };
+
+  // Hero stats: count up shortly after page load, since they're above the fold
+  var heroCountEls = document.querySelectorAll(".hero-stat b[data-count]");
+  if (heroCountEls.length) {
+    setTimeout(function () { heroCountEls.forEach(runCount); }, 500);
+  }
+
+  // Leistungen stats: count up once scrolled into view
+  var leistungenCountEls = document.querySelectorAll(".leistungen-stat b[data-count]");
+  if (leistungenCountEls.length) {
+    if (prefersReducedMotion || typeof IntersectionObserver === "undefined") {
+      leistungenCountEls.forEach(runCount);
+    } else {
+      var statObserver = new IntersectionObserver(
+        function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              runCount(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.6 }
+      );
+      leistungenCountEls.forEach(function (el) { statObserver.observe(el); });
+    }
   }
 
   // ---------- Scroll progress bar ----------
