@@ -54,6 +54,9 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
+  <div class="hero-shape hero-shape-1" aria-hidden="true"></div>
+  <div class="hero-shape hero-shape-2" aria-hidden="true"></div>
+  <div class="hero-shape hero-shape-3" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
       <div class="eyebrow hero-eyebrow">Fachpraxis für Orthopädie &amp; Unfallchirurgie</div>
@@ -88,6 +91,10 @@
       </div>
     </div>
   </div>
+  <button type="button" class="scroll-cue" id="scrollCue" aria-label="Nach unten scrollen">
+    <span></span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 40 C 360 90 1080 0 1440 40 L1440 80 L0 80 Z" fill="#f6f9f9"/></svg>
 </section>
 
@@ -344,29 +351,41 @@
     <div class="team-panel active" data-team-panel="hagen">
       <h3 class="team-panel-title">Team Hagen-Boele</h3>
       <div class="team-grid">
-        <div class="team-card">
-          <img src="assets/team-hagen-tanja-schmermbeck.jpg" alt="Tanja Schmermbeck, Medizinische Fachangestellte">
-          <div class="team-card-body"><strong>Tanja Schmermbeck</strong><span>MFA — Physikalische Therapie &amp; Röntgen</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-hagen-tanja-schmermbeck.jpg" alt="Tanja Schmermbeck, Medizinische Fachangestellte"></div>
+            <div class="team-face team-back"><strong>Tanja Schmermbeck</strong><span>MFA — Physikalische Therapie &amp; Röntgen</span></div>
+          </div>
         </div>
-        <div class="team-card">
-          <img src="assets/team-hagen-angela-bagordo.jpg" alt="Angela Bagordo, Medizinische Fachangestellte">
-          <div class="team-card-body"><strong>Angela Bagordo</strong><span>MFA — Röntgendiagnostik, Physikalische Therapie</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-hagen-angela-bagordo.jpg" alt="Angela Bagordo, Medizinische Fachangestellte"></div>
+            <div class="team-face team-back"><strong>Angela Bagordo</strong><span>MFA — Röntgendiagnostik, Physikalische Therapie</span></div>
+          </div>
         </div>
-        <div class="team-card">
-          <img src="assets/team-hagen-tuelin-polat.jpg" alt="Tülin Polat, Medizinische Fachangestellte">
-          <div class="team-card-body"><strong>Tülin Polat</strong><span>MFA — Röntgendiagnostik, Anmeldung, Abrechnung</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-hagen-tuelin-polat.jpg" alt="Tülin Polat, Medizinische Fachangestellte"></div>
+            <div class="team-face team-back"><strong>Tülin Polat</strong><span>MFA — Röntgendiagnostik, Anmeldung, Abrechnung</span></div>
+          </div>
         </div>
-        <div class="team-card">
-          <img src="assets/team-hagen-krystyna-kondrat.jpg" alt="Krystyna Kondrat, MFA Auszubildende">
-          <div class="team-card-body"><strong>Krystyna Kondrat</strong><span>MFA Auszubildende</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-hagen-krystyna-kondrat.jpg" alt="Krystyna Kondrat, MFA Auszubildende"></div>
+            <div class="team-face team-back"><strong>Krystyna Kondrat</strong><span>MFA Auszubildende</span></div>
+          </div>
         </div>
-        <div class="team-card">
-          <img src="assets/team-hagen-pariya-shamsi.jpg" alt="Pariya Shamsi, MFA Auszubildende">
-          <div class="team-card-body"><strong>Pariya Shamsi</strong><span>MFA Auszubildende</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-hagen-pariya-shamsi.jpg" alt="Pariya Shamsi, MFA Auszubildende"></div>
+            <div class="team-face team-back"><strong>Pariya Shamsi</strong><span>MFA Auszubildende</span></div>
+          </div>
         </div>
-        <div class="team-card">
-          <img src="assets/team-hagen-karasu.jpg" alt="Frau Karasu, Anmeldung">
-          <div class="team-card-body"><strong>Frau Karasu</strong><span>Anmeldung</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-hagen-karasu.jpg" alt="Frau Karasu, Anmeldung"></div>
+            <div class="team-face team-back"><strong>Frau Karasu</strong><span>Anmeldung</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -374,29 +393,41 @@
     <div class="team-panel" data-team-panel="ennepetal">
       <h3 class="team-panel-title">Team Ennepetal</h3>
       <div class="team-grid">
-        <div class="team-card">
-          <img src="assets/team-katja-limpert.jpg" alt="Katja Limpert, Medizinische Fachangestellte">
-          <div class="team-card-body"><strong>Katja Limpert</strong><span>Medizinische Fachangestellte</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-katja-limpert.jpg" alt="Katja Limpert, Medizinische Fachangestellte"></div>
+            <div class="team-face team-back"><strong>Katja Limpert</strong><span>Medizinische Fachangestellte</span></div>
+          </div>
         </div>
-        <div class="team-card">
-          <img src="assets/team-aleyna-dirik.jpg" alt="Aleyna Dirik, Medizinische Fachangestellte">
-          <div class="team-card-body"><strong>Aleyna Dirik</strong><span>Medizinische Fachangestellte</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-aleyna-dirik.jpg" alt="Aleyna Dirik, Medizinische Fachangestellte"></div>
+            <div class="team-face team-back"><strong>Aleyna Dirik</strong><span>Medizinische Fachangestellte</span></div>
+          </div>
         </div>
-        <div class="team-card">
-          <img src="assets/team-lea-schulze.jpg" alt="Lea Alina Schulze, Medizinische Fachangestellte">
-          <div class="team-card-body"><strong>Lea Alina Schulze</strong><span>Medizinische Fachangestellte</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-lea-schulze.jpg" alt="Lea Alina Schulze, Medizinische Fachangestellte"></div>
+            <div class="team-face team-back"><strong>Lea Alina Schulze</strong><span>Medizinische Fachangestellte</span></div>
+          </div>
         </div>
-        <div class="team-card">
-          <img src="assets/team-enisa-zejnilovic.jpg" alt="Enisa Zejnilovic, Auszubildende">
-          <div class="team-card-body"><strong>Enisa Zejnilovic</strong><span>Auszubildende</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-enisa-zejnilovic.jpg" alt="Enisa Zejnilovic, Auszubildende"></div>
+            <div class="team-face team-back"><strong>Enisa Zejnilovic</strong><span>Auszubildende</span></div>
+          </div>
         </div>
-        <div class="team-card">
-          <img src="assets/team-mair-ahmad.jpg" alt="Mair Ahmad, Auszubildende">
-          <div class="team-card-body"><strong>Mair Ahmad</strong><span>Auszubildende</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-mair-ahmad.jpg" alt="Mair Ahmad, Auszubildende"></div>
+            <div class="team-face team-back"><strong>Mair Ahmad</strong><span>Auszubildende</span></div>
+          </div>
         </div>
-        <div class="team-card">
-          <img src="assets/team-valxhana-ademi.jpg" alt="Valxhana Ademi, Anmeldung">
-          <div class="team-card-body"><strong>Valxhana Ademi</strong><span>Anmeldung</span></div>
+        <div class="team-flip" tabindex="0">
+          <div class="team-flip-inner">
+            <div class="team-face team-front"><img src="assets/team-valxhana-ademi.jpg" alt="Valxhana Ademi, Anmeldung"></div>
+            <div class="team-face team-back"><strong>Valxhana Ademi</strong><span>Anmeldung</span></div>
+          </div>
         </div>
       </div>
     </div>

@@ -102,6 +102,15 @@
     });
   }
 
+  // Scroll cue: jump to the content right after the hero
+  var scrollCue = document.getElementById("scrollCue");
+  if (scrollCue) {
+    scrollCue.addEventListener("click", function () {
+      var next = document.querySelector(".trust");
+      if (next) next.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
+    });
+  }
+
   // Mobile nav toggle
   var navToggle = document.getElementById("navToggle");
   var navLinks = document.getElementById("navLinks");
@@ -200,7 +209,7 @@
   }
 
   // ---------- Flip cards: tap-to-flip on touch devices, keyboard support ----------
-  document.querySelectorAll(".flip-card").forEach(function (card) {
+  document.querySelectorAll(".flip-card, .team-flip").forEach(function (card) {
     card.addEventListener("click", function () {
       card.classList.toggle("flipped");
     });
@@ -214,7 +223,7 @@
 
   // ---------- Scroll reveal (re-animates both scrolling down AND back up) ----------
   var revealTargets = document.querySelectorAll(
-    ".section-head, .flip-card, .doctor-card, .team-card, " +
+    ".section-head, .flip-card, .doctor-card, .team-flip, " +
     ".process-card, .contact-card, .loc-tab, .cta-band, .hero-loc, " +
     ".leistungen-stat, .gallery-item, .digital-card, .qr-card"
   );
@@ -388,7 +397,6 @@
   if (!prefersReducedMotion && window.matchMedia("(hover: hover)").matches) {
     var tiltConfigs = [
       { selector: ".doctor-card", strength: 6, lift: -4, perspective: 900 },
-      { selector: ".team-card", strength: 8, lift: -3, perspective: 800 },
       { selector: ".digital-card", strength: 7, lift: -3, perspective: 800 },
       { selector: ".leistungen-stat", strength: 8, lift: -3, perspective: 700 },
       { selector: ".contact-card", strength: 5, lift: -2, perspective: 900 },
